@@ -45,7 +45,7 @@ ui <- semanticPage(
 server <- function(input, output, session) {
   
   mortality_data <- read_parquet("mortality_full.parquet", as_data_frame = FALSE)
-  group_vars_values <- purrr::map(grouping_vars, ~ unique(unique(mortality_data$GetColumnByName(.)$as_vector()))) %>% 
+  group_vars_values <- purrr::map(grouping_vars, ~ unique(mortality_data$GetColumnByName(.)$as_vector())) %>% 
     setNames(grouping_vars)
   
   output$group_var_options <- renderUI({
